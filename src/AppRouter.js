@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import App from './App.js';
+import AppClientPagination from './AppClientPagination.js';
 
 const AppRouter = () => (
     <Router>
@@ -8,6 +9,7 @@ const AppRouter = () => (
             <Header />
             <Route exact path="/" component={Home} />
             <Route exact path="/app" component={App} />
+            <Route exact path="/pagination" component={AppClientPagination} />
         </div>
     </Router>
 );
@@ -20,6 +22,9 @@ const Header = () => (
             </li>
             <li className="nav-item">
                 <Link className="nav-link" to="/app">Login</Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link" to="/pagination">Pagination</Link>
             </li>
         </ul>
     </nav>
