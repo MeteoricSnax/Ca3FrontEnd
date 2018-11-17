@@ -18,11 +18,15 @@ class LogIn extends Component {
   }
   render() {
     return (
-      <div className="container">
-        <form onSubmit={this.login} onChange={this.onChange} >
-          <input placeholder="User Name" id="username" />
-          <input placeholder="Password" id="password" />
-          <button className="btn btn-primary">Login</button>
+      <div className="ml-auto">
+        <form onSubmit={this.login} onChange={this.onChange} className="form-inline">
+          <div className="input-group ">
+            <input placeholder="User Name" id="username" className="form-control" />
+            <input type="password" placeholder="Password" id="password" className="form-control"/>
+            <div className="input-group-append">
+              <button className="btn btn-primary">Login</button>
+            </div>
+          </div>
         </form>
       </div>
     )
@@ -58,10 +62,7 @@ class Header extends Component {
           <li className="nav-item">
             <Link className="nav-link" to="/">Home</Link>
           </li>
-          <li className="nav-item">
-            <LogIn login={this.props.login} />
-          </li>
-        </ul>
+        </ul><LogIn login={this.props.login} />
       </nav>) : (<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
         <ul className="navbar-nav">
           <li className="nav-item">
@@ -73,10 +74,8 @@ class Header extends Component {
           <li className="nav-item">
             <Link className="nav-link" to="/pagination">Pagination</Link>
           </li>
-          <li className="nav-item">
-            <button onClick={this.props.logout} className="btn btn-primary">Logout</button>
-          </li>
         </ul>
+        <button onClick={this.props.logout} className="btn btn-primary ml-auto">Logout</button>
       </nav>)
     );
   }
