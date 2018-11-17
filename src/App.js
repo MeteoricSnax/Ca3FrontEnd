@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import facade from "./apiFacade";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Link, Switch } from "react-router-dom";
 import AppClientPagination from './AppClientPagination.js';
 //import Header from './Header.js';
 
@@ -33,8 +33,8 @@ class LoggedIn extends Component {
     super(props);
     this.state = { dataFromServer: "Fetching!!" };
   }
-  componentDidMount() { 
-    facade.fetchData().then(res=> this.setState({dataFromServer: res}));
+  componentDidMount() {
+    facade.fetchData().then(res => this.setState({ dataFromServer: res }));
   }
   render() {
     return (
@@ -51,27 +51,44 @@ class Header extends Component {
   constructor(props) {
     super(props);
   }
-  render(){
-    return(
-    <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+  render() {
+    return (
+      !this.props.loggedIn ? (<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
         <ul className="navbar-nav">
-            <li className="nav-item">
-                <Link className="nav-link" to="/">Home</Link>
-            </li>
-            <li className="nav-item">
-                <Link className="nav-link" to="/user">User</Link>
-            </li>
-            <li className="nav-item">
-                <Link className="nav-link" to="/pagination">Pagination</Link>
-            </li>
-            <li className="nav-item">
-                {!this.props.loggedIn ? (<LogIn login={this.props.login} />) :
-                 (<div><button onClick={this.props.logout} className="btn btn-primary">Logout</button></div>)}
-            </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/">Home</Link>
+          </li>
+          <li className="nav-item">
+            <LogIn login={this.props.login} />
+          </li>
         </ul>
-    </nav>);
-    }
+      </nav>) : (<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link className="nav-link" to="/">Home</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/user">User</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/pagination">Pagination</Link>
+          </li>
+          <li className="nav-item">
+            <button onClick={this.props.logout} className="btn btn-primary">Logout</button>
+          </li>
+        </ul>
+      </nav>)
+    );
+  }
 }
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={(props) => (
+    facade.loggedIn() === true
+      ? <Component {...props} />
+      : <Redirect to='/' />
+  )} />
+)
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -80,12 +97,12 @@ class App extends Component {
   logout = () => {
     facade.logout();
     this.setState({ loggedIn: false });
-  } 
+  }
   login = (user, pass) => {
     facade.login(user, pass)
       .then(res => this.setState({ loggedIn: true }));
-  } 
-  componentDidMount(){
+  }
+  componentDidMount() {
     this.setState({
       loggedIn: facade.loggedIn()
     });
@@ -93,13 +110,13 @@ class App extends Component {
   render() {
     return (
       <Router>
-      <div>
-          <Header loggedIn={this.state.loggedIn} logout={this.logout} login={this.login}/>
+        <div>
+          <Header loggedIn={this.state.loggedIn} logout={this.logout} login={this.login} />
           <Route exact path="/" component={Home} />
-          <Route exact path="/user" component={LoggedIn} />
-          <Route exact path="/pagination" component={AppClientPagination} />
-      </div>
-    </Router>
+          <PrivateRoute exact path="/user" component={LoggedIn} />
+          <PrivateRoute exact path="/pagination" component={AppClientPagination} />
+        </div>
+      </Router>
     )
   }
 }
