@@ -47,6 +47,10 @@ class ApiFacade {
         const options = this.makeOptions("GET", true); //True add's the token
         return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
     }
+    fetchTableData = () => {
+        const options = this.makeOptions("GET", true); 
+        return fetch(URL + "/api/person", options).then(handleHttpErrors);
+    }
 }
 const facade = new ApiFacade();
 export default facade;

@@ -1,5 +1,9 @@
 import React, { Component } from "react"
 import facade from "./apiFacade";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import AppClientPagination from './AppClientPagination.js';
+//import Header from './Header.js';
+
 class LogIn extends Component {
   constructor(props) {
     super(props);
@@ -15,11 +19,10 @@ class LogIn extends Component {
   render() {
     return (
       <div className="container">
-        <h2>Login</h2>
         <form onSubmit={this.login} onChange={this.onChange} >
           <input placeholder="User Name" id="username" />
           <input placeholder="Password" id="password" />
-          <button>Login</button>
+          <button className="btn btn-primary">Login</button>
         </form>
       </div>
     )
@@ -42,6 +45,33 @@ class LoggedIn extends Component {
     )
   }
 }
+const Home = () => <div className="container"><h3>Home</h3></div>;
+
+class Header extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render(){
+    return(
+    <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+        <ul className="navbar-nav">
+            <li className="nav-item">
+                <Link className="nav-link" to="/">Home</Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link" to="/user">User</Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link" to="/pagination">Pagination</Link>
+            </li>
+            <li className="nav-item">
+                {!this.props.loggedIn ? (<LogIn login={this.props.login} />) :
+                 (<div><button onClick={this.props.logout} className="btn btn-primary">Logout</button></div>)}
+            </li>
+        </ul>
+    </nav>);
+    }
+}
 class App extends Component {
   constructor(props) {
     super(props);
@@ -55,15 +85,21 @@ class App extends Component {
     facade.login(user, pass)
       .then(res => this.setState({ loggedIn: true }));
   } 
+  componentDidMount(){
+    this.setState({
+      loggedIn: facade.loggedIn()
+    });
+  }
   render() {
     return (
+      <Router>
       <div>
-        {!this.state.loggedIn ? (<LogIn login={this.login} />) :
-          (<div>
-            <LoggedIn />
-            <button onClick={this.logout}>Logout</button>
-          </div>)}
+          <Header loggedIn={this.state.loggedIn} logout={this.logout} login={this.login}/>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/user" component={LoggedIn} />
+          <Route exact path="/pagination" component={AppClientPagination} />
       </div>
+    </Router>
     )
   }
 }

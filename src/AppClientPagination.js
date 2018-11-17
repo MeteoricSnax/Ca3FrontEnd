@@ -3,6 +3,7 @@ import '../node_modules/react-bootstrap-table-next/dist/react-bootstrap-table2.m
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import facade from './apiFacade';
 
 const columns = [{
     dataField: 'name',
@@ -33,8 +34,7 @@ class AppClientPagination extends Component {
     async componentDidMount() {
         console.time("fetching");
         this.setState({ msg: "Loading..." });
-        const persons = await
-            fetch("http://localhost:8084/jwtbackend/api/person").then(res => res.json());
+        const persons = await facade.fetchTableData();
         console.timeEnd("fetching");
         console.time("rendering");
         this.setState({ persons, msg: "" });
