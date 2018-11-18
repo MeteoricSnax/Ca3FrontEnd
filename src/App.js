@@ -1,8 +1,7 @@
 import React, { Component } from "react"
 import facade from "./apiFacade";
-import { BrowserRouter as Router, Route, Redirect, Link, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Redirect, Link, Switch } from "react-router-dom";
 import AppClientPagination from './AppClientPagination.js';
-//import Header from './Header.js';
 
 class LogIn extends Component {
   constructor(props) {
