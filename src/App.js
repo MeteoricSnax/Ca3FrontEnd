@@ -42,7 +42,7 @@ class LoggedIn extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="container">
         <h2>Data Received from server</h2>
         <h3>{this.state.dataFromServer}</h3>
       </div>
@@ -50,19 +50,14 @@ class LoggedIn extends Component {
   }
 }
 const Home = () => <div className="container"><h3>Home</h3></div>;
-
-class Header extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
+const Header = (props) => {
     return (
-      !this.props.loggedIn ? (<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+      !props.loggedIn ? (<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
         <ul className="navbar-nav">
           <li className="nav-item">
             <Link className="nav-link" to="/">Home</Link>
           </li>
-        </ul><LogIn login={this.props.login} />
+        </ul><LogIn login={props.login} />
       </nav>) : (<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
         <ul className="navbar-nav">
           <li className="nav-item">
@@ -75,10 +70,9 @@ class Header extends Component {
             <Link className="nav-link" to="/pagination">Pagination</Link>
           </li>
         </ul>
-        <button onClick={this.props.logout} className="btn btn-primary ml-auto">Logout</button>
+        <button onClick={props.logout} className="btn btn-primary ml-auto">Logout</button>
       </nav>)
     );
-  }
 }
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
