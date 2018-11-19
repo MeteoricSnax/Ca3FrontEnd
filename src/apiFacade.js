@@ -1,4 +1,4 @@
-const URL = "http://localhost:8084/jwtbackend";
+const URL = "https://albertvandel.dk/jwtBackend-1.0-SNAPSHOT";
 
 function handleHttpErrors(res) {
     if (!res.ok) {
