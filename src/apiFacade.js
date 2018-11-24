@@ -1,4 +1,4 @@
-const URL = "https://albertvandel.dk/jwtBackend-1.0-SNAPSHOT";
+const URL = "http://localhost:8084/jwtbackend";
 
 function handleHttpErrors(res) {
     if (!res.ok) {
@@ -49,7 +49,12 @@ class ApiFacade {
     }
     fetchTableData = () => {
         const options = this.makeOptions("GET", true); 
-        return fetch(URL + "/api/person", options).then(handleHttpErrors);
+        return fetch(URL + "/api/candy", options).then(handleHttpErrors);
+    }
+    fetchCandyDetails = (id) => {
+        const options = this.makeOptions("GET", true); 
+        console.log("Fetching from: " + URL + "/api/candy/" + id);
+        return fetch(URL + "/api/candy/" + id, options).then(handleHttpErrors);
     }
 }
 const facade = new ApiFacade();
