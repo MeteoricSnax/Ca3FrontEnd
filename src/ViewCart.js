@@ -1,17 +1,43 @@
 import React from 'react';
 import cart from './shoppingCart';
 
+const DisplayCart = () => {
+    return cart.isEmpty() ? (
+        <div>
+            <p>Your cart is empty.</p>
+        </div>
+    ) : (<div>
+        <ul className="list-group">
+        {cart.getCart().map((item) =>
+            <li key={item.id} className="list-group-item">{item.weight}g {item.name}</li>
+        )}
+        </ul>
+    </div>
+        )
+}
+
 const CartComponent = () => {
     return <div className="container">
         <h2>Shopping Cart</h2>
-        <p>Weight: {cart.getWeight()}g, Price: {cart.getPrice()}kr.</p>
-        {cart.getCart().map((item) => 
-            <li key={item.id}>{item.weight}g {item.name}</li>
-        )}
-        <div className="col-sm-2 float-right">
-            <button className="btn btn-primary">Checkout</button>
-        </div>
+        <DisplayCart></DisplayCart>
+            <div className="row">
+                <div className="col-md-10">
+                    <div></div>
+                </div>
+                <div className="col-md-2">
+                    <p className="text-success">Total Weight: {cart.getWeight()}g</p>
+                    <p className="text-success">Total Price: {cart.getPrice()}kr.</p>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-10">
+                    <button onClick={cart.emptyCart} className="btn btn-secondary">Empty Cart</button>
+                </div>
+                <div className="col-md-2">
+                    <button className="btn btn-primary">Checkout</button>
+                </div>
+            </div>
     </div>
-    
+
 }
 export default CartComponent;

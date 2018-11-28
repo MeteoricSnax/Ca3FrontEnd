@@ -6,7 +6,7 @@ import cart from './shoppingCart';
 class CandyDetails extends Component {
     constructor(props) {
         super(props);
-        this.state = { weight: 0, candy: [] }
+        this.state = { weight: 0, candy: []}
     }
 
     onChange = (evt) => {
@@ -19,7 +19,7 @@ class CandyDetails extends Component {
     }
 
     addToCart = () => {
-        cart.addToCart(this.state.candy.id, this.state.candy.name, this.state.weight);
+        cart.addToCart2(this.state.candy.id, this.state.candy.name, this.state.weight);
     }
     render() {
         return (

@@ -16,11 +16,11 @@ class ViewUser extends Component {
           <h3>{this.state.dataFromServer}</h3>
           <form>
             <div className="form-group">
-              <label for="username">Username</label>
+              <label>Username</label>
               <input placeholder="User Name" id="username" className="form-control"/>
             </div>
             <div className="form-group">
-              <label for="password">Password</label>
+              <label>Password</label>
               <input type="password" placeholder="Password" id="password" className="form-control"/>
             </div>
             <div className="form-group">

@@ -7,6 +7,7 @@ import Header from "./Header";
 import ViewUser from "./User";
 import ViewCart from './ViewCart';
 import Home from './Home';
+import cart from './shoppingCart';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
@@ -19,7 +20,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { loggedIn: false }
+    this.state = { loggedIn: false, cart: [] }
   }
   logout = () => {
     facade.logout();
@@ -34,6 +35,13 @@ class App extends Component {
       loggedIn: facade.loggedIn()
     });
   }
+  updateCart = () => {
+    this.setState({
+      cart: cart.getCart()
+    });
+  }
+
+  // <PrivateRoute path="/cart" render={(props) => <ViewCart {...props} updateCart={this.updateCart}></ViewCart>} />
   render() {
     return (
       <Router>

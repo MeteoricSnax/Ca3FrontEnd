@@ -1,29 +1,15 @@
-import React, {Component} from "react"
+import React from "react"
 
-class ErrorMessage extends Component{
-    showError = (props) => {
-        return (
-            <div className="alert alert-warning" role="alert">
-                <strong>Error! </strong>
-                {props.message}
-            </div>
-        )
-    }
-    showNeutral = (props) => {
-        return (
-            <div className="alert alert-info" role="alert">
-                <strong>Error! </strong>
-                {props.message}
-            </div>
-        )
-    }
-    showSuccess = (props) => {
-        return (
-            <div className="alert alert-success" role="alert">
-                <strong>Error! </strong>
-                {props.message}
-            </div>
-        )
-    }
+export const ShowSuccess = (props) => {
+    return <div className="alert alert-success" role="alert">
+        <strong>Success! </strong>
+        {props.message}
+    </div>
 }
-export default ErrorMessage;
+
+export const ErrorMessage = (props) => {
+    return <div className="alert alert-success" role="alert">
+        <strong>Error! </strong>
+        {props.message}
+    </div>
+}
