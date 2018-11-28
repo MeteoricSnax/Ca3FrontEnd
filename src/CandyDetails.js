@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import facade from './apiFacade';
 import { Link } from "react-router-dom";
 import cart from './shoppingCart';
+import { ShowError, ShowNeutral, ShowSuccess } from './ErrorMessage';
 
 class CandyDetails extends Component {
     constructor(props) {
         super(props);
-        this.state = { weight: 0, candy: [] }
+        this.state = { weight: 0, candy: [], clicked: false }
     }
 
     onChange = (evt) => {
@@ -18,8 +19,18 @@ class CandyDetails extends Component {
         this.setState({ candy: data });
     }
 
+    feedBack = () => {
+        if (this.state.weight > 0 && this.state.clicked === true) {
+            return (<ShowSuccess message="Item added to cart" />)
+        }
+        if(this.state.weight < 0 && this.state.clicked == true) {
+            return (<ShowError message="Failed to add to cart"></ShowError>)
+        }
+    }
+
     addToCart = () => {
         cart.addToCart(this.state.candy.id, this.state.candy.name, this.state.weight);
+        this.setState({clicked: true});
     }
     render() {
         return (
@@ -35,10 +46,11 @@ class CandyDetails extends Component {
                     <div className="input-group">
                         <input placeholder="Weight" id="weight" type="number" className="form-control"/>
                         <div className="input-group-append">
-                            <button onClick={this.addToCart} className="btn btn-primary">Add To Cart</button>
+                            <button id="btn" onClick={this.addToCart} className="btn btn-primary">Add To Cart</button>
                         </div>
                     </div>
                 </form>
+                {this.feedBack()}
                 <Link to="/candy">Back</Link>
             </div>)
     }

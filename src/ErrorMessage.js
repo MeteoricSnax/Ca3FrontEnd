@@ -1,7 +1,6 @@
 import React, {Component} from "react"
 
-class ErrorMessage extends Component{
-    showError = (props) => {
+  export const ShowError = (props) => {
         return (
             <div className="alert alert-warning" role="alert">
                 <strong>Error! </strong>
@@ -9,7 +8,7 @@ class ErrorMessage extends Component{
             </div>
         )
     }
-    showNeutral = (props) => {
+   export const ShowNeutral = (props) => {
         return (
             <div className="alert alert-info" role="alert">
                 <strong>Error! </strong>
@@ -17,13 +16,11 @@ class ErrorMessage extends Component{
             </div>
         )
     }
-    showSuccess = (props) => {
+   export const ShowSuccess = (props) => {
         return (
             <div className="alert alert-success" role="alert">
-                <strong>Error! </strong>
+                <strong>Success! </strong>
                 {props.message}
             </div>
         )
     }
-}
-export default ErrorMessage;
