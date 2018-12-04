@@ -6,17 +6,18 @@ const DisplayCart = () => {
         <div>
             <p>Your cart is empty.</p>
         </div>
-    ) : (<div>
+    ) : (
+    <div>
         <ul className="list-group">
-        {cart.getCart().map((item) =>
-            <li key={item.id} className="list-group-item">{item.weight}g {item.name}</li>
-        )}
+            {cart.getCart().map((item) =>
+                <li key={item.id} className="list-group-item">{item.weight}g {item.name}</li>
+            )}
         </ul>
     </div>
         )
 }
 
-const CartComponent = () => {
+const CartComponent = (props) => {
     return <div className="container">
         <h2>Shopping Cart</h2>
         <DisplayCart></DisplayCart>
@@ -31,7 +32,7 @@ const CartComponent = () => {
             </div>
             <div className="row">
                 <div className="col-md-10">
-                    <button onClick={cart.emptyCart} className="btn btn-secondary">Empty Cart</button>
+                    <button onClick={props.emptyCart} className="btn btn-secondary">Empty Cart</button>
                 </div>
                 <div className="col-md-2">
                     <button className="btn btn-primary">Checkout</button>

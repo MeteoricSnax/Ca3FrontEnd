@@ -32,7 +32,8 @@ class CandyDetails extends Component {
 
     addToCart = () => {
         if(UserInput.validateInput(this.state.weight) === true){
-        cart.addToCart2(this.state.candy.id, this.state.candy.name, this.state.weight);
+            cart.addToCart2(this.state.candy.id, this.state.candy.name, this.state.weight);
+            this.props.updateCart();
         }
         this.setState({clicked: true});
     }
