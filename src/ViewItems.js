@@ -23,6 +23,11 @@ const columns = [{
     text: 'Flavour',
     sort: true,
     filter: textFilter()
+}, {
+    dataField: 'stock',
+    text: 'Stock',
+    sort: true,
+    filter: textFilter()
 }];
 
 function viewDetails(cell, row) {

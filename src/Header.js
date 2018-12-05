@@ -33,7 +33,7 @@ const Header = (props) => {
               <Link className="nav-link" to="/candy">View Candy</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/cart">Cart <span className="badge badge-success">{cart.getWeight()}g</span></Link>
+              <Link className="nav-link" to="/cart">Cart <span className="badge badge-success">{props.weight}g</span></Link>
             </li>
           </ul>
           <button onClick={props.logout} className="btn btn-primary ml-auto">Logout</button>

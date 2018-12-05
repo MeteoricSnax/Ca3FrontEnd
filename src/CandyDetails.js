@@ -3,6 +3,7 @@ import facade from './apiFacade';
 import { Link } from "react-router-dom";
 import cart from './shoppingCart';
 import { ShowError, ShowNeutral, ShowSuccess } from './ErrorMessage';
+import UserInput from './UserInput';
 
 class CandyDetails extends Component {
     constructor(props) {
@@ -12,6 +13,7 @@ class CandyDetails extends Component {
 
     onChange = (evt) => {
         this.setState({ [evt.target.id]: evt.target.value })
+        this.setState({clicked: false});
     }
 
     async componentDidMount() {
@@ -23,13 +25,16 @@ class CandyDetails extends Component {
         if (this.state.weight > 0 && this.state.clicked === true) {
             return (<ShowSuccess message="Item added to cart" />)
         }
-        if(this.state.weight < 0 && this.state.clicked == true) {
+        if(this.state.weight <= 0 && this.state.clicked == true) {
             return (<ShowError message="Failed to add to cart"></ShowError>)
         }
     }
 
     addToCart = () => {
-        cart.addToCart2(this.state.candy.id, this.state.candy.name, this.state.weight);
+        if(UserInput.validateInput(this.state.weight) === true){
+            cart.addToCart2(this.state.candy.id, this.state.candy.name, this.state.weight);
+            this.props.updateCart();
+        }
         this.setState({clicked: true});
     }
     render() {
