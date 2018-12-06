@@ -18,7 +18,7 @@ const DisplayCart = () => {
 }
 
 const CartComponent = (props) => {
-    return <div className="container">
+    return <div className="container" id="white">
         <h2>Shopping Cart</h2>
         <DisplayCart></DisplayCart>
             <div className="row">

@@ -39,7 +39,7 @@ class CandyDetails extends Component {
     }
     render() {
         return (
-            <div className="container">
+            <div className="container" id="white">
                 <h2>Item Details</h2>
                 <p>ID: {this.state.candy.id}</p>
                 <p>Name: {this.state.candy.name}</p>

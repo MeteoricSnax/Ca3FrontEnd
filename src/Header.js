@@ -5,13 +5,13 @@ import cart from './shoppingCart';
 
 const imgstyle = {
   hight: '60px',
-  width: '60px',
+  width: '60px'
 };
 
 const Header = (props) => {
   return (
     !props.loggedIn ? (
-      <nav className="navbar navbar-expand-sm bg-dark navbar-gray">
+      <nav className="navbar navbar-expand-sm bg-dark navbar-gray rounded-bottom">
         <ul className="navbar-nav">
           <li className="nav-item">
             <Link className="nav-link" to="/">Home</Link>
@@ -19,7 +19,7 @@ const Header = (props) => {
         </ul><LogIn login={props.login} />
       </nav>
     ) : (
-        <nav className="navbar navbar-expand-sm bg-dark navbar-gray">
+        <nav className="navbar navbar-expand-sm bg-dark navbar-gray rounded-bottom">
         
         <img src={require('./slik.jpg')} style={imgstyle}/>
           <ul className="navbar-nav">

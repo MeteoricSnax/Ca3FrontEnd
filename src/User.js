@@ -11,7 +11,7 @@ class ViewUser extends Component {
     }
     render() {
       return (
-        <div className="container">
+        <div className="container" id="white">
           <h2>Update User</h2>
           <h3>{this.state.dataFromServer}</h3>
           <form>
