@@ -43,6 +43,11 @@ class ApiFacade {
             .then(handleHttpErrors)
             .then(res => { this.setToken(res.token) })
     }
+    postOrder = (cart) => {
+        const options = this.makeOptions("POST", true, { candy: cart }); //True add's the token
+        console.log("Hello from postOrder");
+        return fetch(URL + "/api/order", options).then(handleHttpErrors);
+    }
     fetchData = () => {
         const options = this.makeOptions("GET", true); //True add's the token
         return fetch(URL + "/api/info/user", options).then(handleHttpErrors);

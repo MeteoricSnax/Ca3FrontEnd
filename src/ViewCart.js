@@ -1,5 +1,6 @@
 import React from 'react';
 import cart from './shoppingCart';
+import facade from './apiFacade';
 
 const DisplayCart = () => {
     return cart.isEmpty() ? (
@@ -16,7 +17,9 @@ const DisplayCart = () => {
     </div>
         )
 }
-
+const checkOut = () => {
+    facade.postOrder(cart.getCart());
+}
 const CartComponent = (props) => {
     return <div className="container">
         <h2>Shopping Cart</h2>
@@ -35,7 +38,7 @@ const CartComponent = (props) => {
                     <button onClick={props.emptyCart} className="btn btn-secondary">Empty Cart</button>
                 </div>
                 <div className="col-md-2">
-                    <button className="btn btn-primary">Checkout</button>
+                    <button onClick={checkOut} className="btn btn-primary">Checkout</button>
                 </div>
             </div>
     </div>
