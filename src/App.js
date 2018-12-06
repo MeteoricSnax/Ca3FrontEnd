@@ -17,6 +17,10 @@ const PrivateRoute = ({ component: Component, updateCart, emptyCart, ...rest }) 
   )} />
 )
 
+const appstyle= {
+  background: 'gray'
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -50,7 +54,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div style={appstyle}>
         <Header loggedIn={this.state.loggedIn} logout={this.logout} login={this.login} weight={this.state.cartWeight}/>
           <Route exact path="/" component={Home} />
           <PrivateRoute exact path="/user" component={ViewUser} />

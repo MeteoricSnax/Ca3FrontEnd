@@ -48,7 +48,7 @@ class AppClientPagination extends Component {
     
     render() {
         return <div>
-            <div className="container">
+            <div className="container" id="white">
                 <h2>View Candy</h2>
                 <BootstrapTable bootstrap4={true} keyField='id' data={this.state.candy} columns={columns} filter={filterFactory()} pagination={paginationFactory()} />
             </div>
